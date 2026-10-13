@@ -1,0 +1,386 @@
+<title>Kingston Mills Test Cloth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one narrow reading column, like a weaver's notebook; the cloth is the only wide object. */
+:root{
+  --ground:#ECEEE9; --surface:#F7F8F4; --ink:#1C2528; --muted:#566265; --line:#C9CFC8;
+  --woad:#2C4A7B; --madder:#8C3342;
+  --display:"Spectral",Georgia,"Times New Roman",serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --s1:.25rem; --s2:.5rem; --s3:.75rem; --s4:1rem; --s5:1.5rem; --s6:2.25rem; --s7:3.25rem;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --ground:#121719; --surface:#1A2124; --ink:#E2E6E2; --muted:#9BA6A7; --line:#2F393B;
+  --woad:#93ACD8; --madder:#D9838F; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --ground:#121719; --surface:#1A2124; --ink:#E2E6E2; --muted:#9BA6A7; --line:#2F393B;
+  --woad:#93ACD8; --madder:#D9838F; color-scheme:dark}
+body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size:1rem;line-height:1.55}
+.wrap{max-width:46rem;margin:0 auto;padding-inline:1.125rem;padding-block:var(--s6) var(--s7);display:flex;flex-direction:column;gap:var(--s7)}
+h1,h2,h3{font-family:var(--display);font-weight:500;text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(2rem,6vw,2.9rem);letter-spacing:-.01em}
+h2{font-size:1.6rem}
+p{margin:0}
+a{color:var(--woad);text-underline-offset:2px}
+a:focus-visible,button:focus-visible,summary:focus-visible,canvas:focus-visible{outline:2px solid var(--woad);outline-offset:2px}
+.eyebrow{font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+header{display:flex;flex-direction:column;gap:var(--s4)}
+.lede{font-family:var(--display);font-size:1.18rem;line-height:1.5;max-width:38rem}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s4);margin:var(--s2) 0 0;border-top:1px solid var(--line);padding-top:var(--s4)}
+.stats div{min-width:0}
+.stats dt{font-family:var(--display);font-size:2rem;line-height:1;font-variant-numeric:tabular-nums}
+.stats dd{margin:var(--s2) 0 0;font-size:.82rem;color:var(--muted);line-height:1.35}
+section{display:flex;flex-direction:column;gap:var(--s4)}
+.sec-head{display:flex;flex-direction:column;gap:var(--s2)}
+.sec-head p{color:var(--muted);max-width:38rem}
+/* mode switch */
+.modes{display:flex;flex-wrap:wrap;gap:var(--s2);align-items:center}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--surface)}
+.seg button{font:500 .88rem var(--body);color:var(--muted);background:none;border:0;border-radius:999px;padding:.4rem .85rem;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--ground)}
+.ghost{font:500 .82rem var(--body);color:var(--woad);background:none;border:1px solid var(--line);border-radius:999px;padding:.4rem .8rem;cursor:pointer}
+.modenote{font-size:.9rem;color:var(--muted);min-height:2.6em}
+.cloth{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:var(--s3) var(--s2)}
+canvas{display:block;touch-action:manipulation;cursor:crosshair}
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:var(--s3) var(--s4);font-size:.8rem;color:var(--muted)}
+.legend .item{display:flex;gap:var(--s2);align-items:center;min-width:0}
+.legend canvas{flex:none;border-radius:2px}
+.legend b{font-weight:600;color:var(--ink)}
+.legend-title{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);grid-column:1/-1;margin-top:var(--s2)}
+.sw{width:22px;height:14px;border-radius:2px;flex:none;border:1px solid rgba(0,0,0,.12)}
+/* detail panel */
+.detail{border-left:3px solid var(--woad);padding:var(--s3) var(--s4);background:var(--surface);border-radius:0 6px 6px 0;display:flex;flex-direction:column;gap:var(--s3)}
+.d-head{font-size:.85rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:.35rem .6rem;align-items:baseline}
+.d-head .mono{color:var(--ink);font-weight:500}
+.chip{font-family:var(--mono);font-size:.7rem;letter-spacing:.04em;text-transform:uppercase;padding:.1rem .45rem;border-radius:999px;border:1px solid var(--line)}
+.d-text{font-family:var(--display);font-size:1.05rem;line-height:1.5}
+.src{font-size:.8rem;color:var(--muted)}
+.reach{display:flex;flex-direction:column;gap:var(--s2);border-top:1px dashed var(--line);padding-top:var(--s3);font-size:.9rem}
+.reach blockquote{margin:0;font-family:var(--display);font-size:.98rem;padding-left:var(--s3);border-left:2px solid var(--line)}
+.why{display:grid;grid-template-columns:auto 1fr;gap:.2rem .6rem;font-size:.85rem}
+.why span:nth-child(odd){font-family:var(--mono);font-size:.72rem;color:var(--muted);padding-top:.12rem}
+.gen{font-size:.75rem;color:var(--muted)}
+/* links */
+.filter{align-self:flex-start}
+.links{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--s5)}
+.link{display:flex;flex-direction:column;gap:var(--s3);padding-top:var(--s4);border-top:1px solid var(--line)}
+.lk-top{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s3);align-items:center;font-size:.8rem}
+.strength{font-family:var(--mono);font-weight:500;font-size:.85rem}
+.badge{font-size:.75rem;padding:.12rem .55rem;border-radius:999px;border:1px solid}
+.badge.only{color:var(--madder);border-color:var(--madder)}
+.badge.kw{color:var(--muted);border-color:var(--line)}
+.gap{color:var(--muted);font-family:var(--mono);font-size:.75rem}
+.lk-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s4)}
+@media (max-width:560px){.lk-pair{grid-template-columns:minmax(0,1fr)}.stats dt{font-size:1.6rem}}
+.lk-rec{min-width:0;display:flex;flex-direction:column;gap:var(--s1)}
+.lk-rec .where{font-size:.78rem;color:var(--muted)}
+.lk-rec .where .mono{color:var(--ink);font-weight:500}
+.lk-rec p{font-size:.9rem;line-height:1.5}
+/* reading + method */
+.prose{display:flex;flex-direction:column;gap:var(--s4);max-width:38rem}
+.prose p,.prose li{line-height:1.6}
+.prose ul,.prose ol{margin:0;padding-left:1.2rem;display:flex;flex-direction:column;gap:var(--s3)}
+.prose strong{font-weight:600}
+.prompt{font-family:var(--mono);font-size:.78rem;line-height:1.55;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:var(--s3) var(--s4);white-space:pre-wrap;overflow-x:auto}
+h3{font-size:1.15rem}
+/* records */
+.recs{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+details{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;padding:var(--s3) 0;display:grid;grid-template-columns:3.2rem minmax(0,1fr);gap:var(--s3);font-size:.9rem;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary .ttl{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+summary .ttl b{font-weight:600}
+.rec-body{padding:0 0 var(--s4) 3.95rem;display:flex;flex-direction:column;gap:var(--s2);font-size:.88rem}
+@media (max-width:480px){.rec-body{padding-left:0}}
+.rec-body .meta{color:var(--muted);font-size:.8rem}
+.fixed{color:var(--madder)}
+footer{font-size:.8rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<main class="wrap">
+<header>
+  <p class="eyebrow">A Fabric Through Time · Test 1 · 13 October 2026</p>
+  <h1>Kingston Mills test cloth</h1>
+  <p class="lede">Forty-six records of Bradford-on-Avon's river, early churches and mills, read blind by two Claude models and woven into a block draft. Places run as warp. Records cross them as weft, oldest at the top. A block rises where a record resembles something written about that place at least a century away.</p>
+  <dl class="stats">
+    <div><dt>50</dt><dd>links between records a century or more apart</dd></div>
+    <div><dt>22</dt><dd>of those also found by plain keyword overlap</dd></div>
+    <div><dt>28</dt><dd>found only by the models</dd></div>
+  </dl>
+</header>
+
+<section id="cloth" aria-labelledby="h-cloth">
+  <div class="sec-head">
+    <h2 id="h-cloth">The cloth</h2>
+    <p>Switch the reading to see what the models add. All three versions raise the same number of blocks; only where they rise changes. Tap a block to see what raised it.</p>
+  </div>
+  <div class="modes">
+    <div class="seg" role="group" aria-label="Which reading raises the blocks">
+      <button type="button" id="m-model" data-mode="model" aria-pressed="true">Models</button>
+      <button type="button" id="m-kw" data-mode="kw" aria-pressed="false">Keywords</button>
+      <button type="button" id="m-shuf" data-mode="shuf" aria-pressed="false">Shuffled</button>
+    </div>
+    <button type="button" class="ghost" id="reshuffle" hidden>Shuffle again</button>
+  </div>
+  <p class="modenote" id="modenote"></p>
+  <div class="cloth"><canvas id="cv" tabindex="0" role="img" aria-label="Woven block draft: twelve places as columns, 46 records as rows in date order"></canvas></div>
+  <div id="detail" class="detail" aria-live="polite"></div>
+  <div class="legend" id="legend"></div>
+</section>
+
+<section id="links" aria-labelledby="h-links">
+  <div class="sec-head">
+    <h2 id="h-links">The links across a century</h2>
+    <p>Every pair of records at least 100 years apart, from different sources, that either model linked. Strength is the two models' scores averaged, out of 5. The reasons are generated text.</p>
+  </div>
+  <div class="seg filter" role="group" aria-label="Which links to list">
+    <button type="button" id="f-both" aria-pressed="true">Both models (<span id="n-both"></span>)</button>
+    <button type="button" id="f-all" aria-pressed="false">Either model (<span id="n-all"></span>)</button>
+  </div>
+  <ol class="links" id="linklist"></ol>
+</section>
+
+<section id="reading" aria-labelledby="h-reading">
+  <h2 id="h-reading">What the test shows</h2>
+  <div class="prose">
+    <p><strong>The models add something the keywords don't.</strong> Of the 50 links across a century, 28 rank outside the keyword method's top 50. In the cloth, the keyword version keeps 31 of the 65 raised blocks, and a shuffled version keeps about 12. Take the models away and about half the cloth's structure changes, which passes your removal test at this small size.</p>
+    <p><strong>The model-only links gather around a few actions.</strong> A sacred building put to secular use: the bridge chapel as a lock-up, the Saxon church as a cottage and school. A repair paid for by appeal: Town Bridge alms in 1400, Avoncliff weir in 2020. Something buried found during other work: the villa under a football pitch, burials under a boiler house. A closure that empties the town: the bank failure of 1841, the works closing in 1992. These are interpretive affinities. None is a documented connection.</p>
+    <p><strong>Rubber hardly crosses time.</strong> Most rubber records link to other rubber records within 150 years, so the century rule drops them. The affinity your thesis uses as its example, river management with machine tension and rubber absorbing force, never came up.</p>
+    <p><strong>Watch what the sources are.</strong> Many records come from heritage listings, which describe buildings through their alterations, conversions and repairs. The conversion and repair links may say more about how listings are written than about the town. Older texts in other voices would test that.</p>
+    <p><strong>The two readers aren't independent.</strong> Opus and Sonnet agreed on 63% of their links, but they come from the same family, and a Claude model also wrote the paraphrases they read.</p>
+  </div>
+</section>
+
+<section id="method" aria-labelledby="h-method">
+  <h2 id="h-method">How it was made</h2>
+  <div class="prose">
+    <ol>
+      <li><strong>Gathering.</strong> Claude research agents collected 46 records from 34 web pages by about 20 publishers. Every record is a paraphrase written by Claude, because the sources are in copyright. A separate agent checked each record against its page; seven had small slips, now fixed and marked below.</li>
+      <li><strong>Dating.</strong> Each record keeps its date written and the date it describes. For the cloth, each record also has one focal year that I chose, such as 1300 for the Town Bridge's 13th-century arches. Those choices decide the row order.</li>
+      <li><strong>Blind reading.</strong> The records were shuffled and given neutral codes. Claude Opus 5.5 and Claude Sonnet 5.5 read them separately, with no project context, and answered the prompt below.</li>
+      <li><strong>Keyword baseline.</strong> TF-IDF word overlap with common English words removed, run on the same text the models read.</li>
+      <li><strong>The century rule.</strong> A link counts only between records at least 100 years apart that come from different pages. That leaves 740 of the 1,035 possible pairs.</li>
+      <li><strong>The weave.</strong> Each place is a block of eight warp threads; each record is four picks of weft, coloured by its strand. A record's own place is woven as satin, so it reads as solid warp. Elsewhere, its strongest link to that place sets the structure: 3/1 twill for 3 or more, 2/2 twill for 2 to 2.5, plain weave for anything weaker, and weft-faced twill for no link. The keyword and shuffled cloths raise the same number of blocks at each level, ranked by their own scores.</li>
+    </ol>
+    <div class="prompt">For every passage, list up to 4 OTHER passages it is most strongly related to. Give each a strength from 1 (faint) to 5 (strong) and a reason of at most 8 words.
+
+Do not count a resemblance if it rests only on: the same place or building, the same named person or organisation, or the same historical period. Any other kind of resemblance counts. If a passage has nothing that meets this, list fewer or none — don't pad.</div>
+    <h3>Limits</h3>
+    <ul>
+      <li>No embedding model. Model downloads are blocked in the workspace this ran in, so the models judged the records in words. That is a generated reading, not a measurement, and the reasons are not a view of how either model decided.</li>
+      <li>The models read the records before the seven fact-check fixes. The fixes changed wording, not substance.</li>
+      <li>Forty-six records is a small sample, and none is yet in its original wording.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="records" aria-labelledby="h-records">
+  <div class="sec-head">
+    <h2 id="h-records">The 46 records</h2>
+    <p>In cloth order, with sources. Tap one to open it.</p>
+  </div>
+  <div class="recs" id="reclist"></div>
+</section>
+
+<footer>Made for A Fabric Through Time. Records gathered and checked on 13 October 2026.</footer>
+</main>
+
+<script>
+const D = /*DATA*/null;
+const R = D.records, n = R.length, G = D.groups;
+const SHORT = {"Roman villa site":"Roman villa","Budbury hillfort":"Budbury","St Laurence church":"St Laurence","Holy Trinity church":"Holy Trinity","Barton (barn & bridge)":"Barton","Town Bridge":"Town Bridge","Kingston Mill & The Hall":"Kingston Mill","Middle Rank":"Middle Rank","Avoncliff":"Avoncliff","Abbey Mill":"Abbey Mill","Greenland Mill":"Greenland","Town-wide":"Town-wide"};
+const STRAND = {river:"River",settlement:"Settlement",textiles:"Textiles",rubber:"Rubber",people:"People"};
+const WEFT = {river:"#BCCFCB",settlement:"#D6D0C0",textiles:"#E8DEC8",rubber:"#A2A6A5",people:"#DDAEA7"};
+const WARP = "#24345A";
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+const mk = () => Array.from({length:n}, () => new Float32Array(n));
+const A = mk(), B = mk(), T = mk(), M = mk(); const PI = {};
+for (const p of D.pairs){ A[p.i][p.j]=A[p.j][p.i]=p.a; B[p.i][p.j]=B[p.j][p.i]=p.b; T[p.i][p.j]=T[p.j][p.i]=p.t; PI[p.i+"-"+p.j]=p; }
+for (let i=0;i<n;i++) for (let j=0;j<n;j++) M[i][j]=(A[i][j]+B[i][j])/2;
+const pair = (i,j) => PI[Math.min(i,j)+"-"+Math.max(i,j)];
+const cross = (i,k) => Math.abs(R[i].year-R[k].year)>=100 && R[i].source_url!==R[k].source_url;
+const rows = [...Array(n).keys()].sort((a,b)=>R[a].year-R[b].year || R[a].id.localeCompare(R[b].id));
+const gIdx = G.map(g => [...Array(n).keys()].filter(k => R[k].site_group===g));
+
+function buildGrid(S){
+  return rows.map(i => G.map((g,c) => {
+    if (R[i].site_group===g) return {own:true, v:0, k:-1, lv:4};
+    let best=0, bk=-1;
+    for (const k of gIdx[c]) if (cross(i,k) && S[i][k]>best){ best=S[i][k]; bk=k; }
+    return {own:false, v:best, k:bk, lv:0};
+  }));
+}
+function levelModel(grid){ grid.forEach(r=>r.forEach(c=>{ if(!c.own) c.lv = c.v>=3?3 : c.v>=2?2 : c.v>0?1 : 0; })); }
+function levelRank(grid, counts){
+  const cand=[]; grid.forEach(r=>r.forEach(c=>{ if(!c.own){ c.lv=0; if(c.v>0) cand.push(c); } }));
+  cand.sort((a,b)=>b.v-a.v); let x=0;
+  for (const L of [3,2,1]) for (let q=0; q<counts[L] && x<cand.length; q++) cand[x++].lv=L;
+}
+const gridModel = buildGrid(M); levelModel(gridModel);
+const counts = {1:0,2:0,3:0}; gridModel.forEach(r=>r.forEach(c=>{ if(c.lv>=1&&c.lv<=3) counts[c.lv]++; }));
+const raisedTotal = counts[1]+counts[2]+counts[3];
+const gridKw = buildGrid(T); levelRank(gridKw, counts);
+function rng(seed){ return () => { seed|=0; seed=seed+0x6D2B79F5|0; let t=Math.imul(seed^seed>>>15,1|seed); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+let shufSeed = 1, gridShuf;
+function makeShuf(){
+  const r=rng(shufSeed*7919), p=[...Array(n).keys()];
+  for (let i=n-1;i>0;i--){ const j=Math.floor(r()*(i+1)); [p[i],p[j]]=[p[j],p[i]]; }
+  const S = Array.from({length:n}, (_,i)=>Float32Array.from({length:n},(_,k)=>M[p[i]][p[k]]));
+  gridShuf = buildGrid(S); levelRank(gridShuf, counts);
+}
+makeShuf();
+function overlap(g){ let o=0; g.forEach((r,ri)=>r.forEach((c,ci)=>{ const m=gridModel[ri][ci].lv; if(c.lv>=1&&c.lv<=3&&m>=1&&m<=3) o++; })); return o; }
+
+let mode="model"; const grids = () => mode==="model"?gridModel : mode==="kw"?gridKw : gridShuf;
+let sel = {r: rows.indexOf(R.findIndex(x=>x.id==="R02")), c: G.indexOf("Avoncliff")};
+
+/* ---------- drawing ---------- */
+const TH=8, PK=4;
+const cv=document.getElementById("cv"), ctx=cv.getContext("2d");
+let geo={};
+const cssVar = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function up(lv,x,y){ switch(lv){ case 0:return (x+y)%4===0; case 1:return (x+y)%2===0; case 2:return (x+y)%4<2; case 3:return (x+y)%4!==0; default:return (3*x+y)%8!==0; } }
+function hash(a){ a=(a^61)^(a>>>16); a=a+(a<<3); a=a^(a>>>4); a=Math.imul(a,0x27d4eb2d); a=a^(a>>>15); return (a>>>0)/4294967296; }
+function shadeCell(c,px,py,s,isUp,col,tx,ty){
+  c.fillStyle=col; c.fillRect(px,py,s,s);
+  const j = isUp ? hash(tx*131+7) : hash(ty*977+3);
+  c.fillStyle = j>.5 ? `rgba(255,255,255,${(j-.5)*.16})` : `rgba(0,0,0,${(.5-j)*.18})`; c.fillRect(px,py,s,s);
+  const lw = s>=4 ? 1 : Math.max(1/(window.devicePixelRatio||1), Math.round(s*.25*(window.devicePixelRatio||1))/(window.devicePixelRatio||1));
+  c.fillStyle="rgba(0,0,0,.22)";
+  if (isUp) c.fillRect(px+s-lw,py,lw,s); else c.fillRect(px,py+s-lw,s,lw);
+  if (s>=4){ c.fillStyle="rgba(255,255,255,.10)"; if(isUp) c.fillRect(px,py,1,s); else c.fillRect(px,py,s,1); }
+}
+function draw(){
+  const wrapW = cv.parentElement.clientWidth - 16;
+  const L=36, RM=26, TOP=92, dpr=window.devicePixelRatio||1;
+  const sp = Math.max(2*dpr, Math.min(7*dpr, Math.floor((wrapW-L-RM)*dpr/(G.length*TH))));
+  const s = sp/dpr;
+  const cw=G.length*TH*s, ch=rows.length*PK*s;
+  const W=L+cw+RM, H=TOP+ch+4;
+  cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr); cv.style.width=W+"px"; cv.style.height=H+"px";
+  ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,W,H);
+  geo={L,TOP,s,cw,ch};
+  const g=grids();
+  for (let ri=0; ri<rows.length; ri++){
+    const weft = WEFT[R[rows[ri]].strand] || WEFT.settlement;
+    for (let ci=0; ci<G.length; ci++){
+      const lv=g[ri][ci].lv;
+      for (let yy=0; yy<PK; yy++){ const ty=ri*PK+yy;
+        for (let xx=0; xx<TH; xx++){ const tx=ci*TH+xx; const u=up(lv,tx,ty);
+          shadeCell(ctx, L+tx*s, TOP+ty*s, s, u, u?WARP:weft, tx, ty); } }
+    }
+  }
+  // labels
+  const ink=cssVar("--ink"), muted=cssVar("--muted");
+  ctx.fillStyle=muted; ctx.font=`11px ${cssVar("--body")}`; ctx.textBaseline="middle";
+  G.forEach((name,ci)=>{ ctx.save(); ctx.translate(L+(ci+.5)*TH*s, TOP-6); ctx.rotate(-Math.PI/2.6); ctx.textAlign="left"; ctx.fillText(SHORT[name]||name,0,0); ctx.restore(); });
+  ctx.font=`${s>=4?10.5:9}px ${cssVar("--mono")}`; ctx.textAlign="right";
+  rows.forEach((i,ri)=>{ ctx.fillStyle = ri===sel.r?ink:muted; ctx.fillText(String(R[i].year), L-4, TOP+(ri+.5)*PK*s); });
+  // selection
+  const bw=TH*s, bh=PK*s;
+  ctx.lineWidth=2; ctx.strokeStyle=ink; ctx.setLineDash([]);
+  ctx.strokeRect(L+sel.c*bw-1, TOP+sel.r*bh-1, bw+2, bh+2);
+  const cell=g[sel.r][sel.c];
+  if (mode!=="shuf" && !cell.own && cell.lv>0 && cell.k>=0){
+    const tr=rows.indexOf(cell.k); ctx.setLineDash([3,3]);
+    ctx.strokeRect(L+sel.c*bw-1, TOP+tr*bh-1, bw+2, bh+2); ctx.setLineDash([]);
+    ctx.lineWidth=1.5; ctx.beginPath(); const x=L+cw+5;
+    ctx.moveTo(L+(sel.c+1)*bw+1, TOP+(sel.r+.5)*bh); ctx.lineTo(x, TOP+(sel.r+.5)*bh); ctx.lineTo(x, TOP+(tr+.5)*bh); ctx.lineTo(L+(sel.c+1)*bw+1, TOP+(tr+.5)*bh); ctx.stroke();
+  }
+}
+
+/* ---------- detail ---------- */
+const LV = ["no link across a century","a faint link","a medium link","a strong link","its own place"];
+function recHead(i){ const r=R[i]; return `<div class="d-head"><span class="mono">${r.year}</span><span>${esc(r.site)}</span><span class="chip">${STRAND[r.strand]}</span></div>`; }
+function srcLine(i){ const r=R[i]; return `<p class="src">Source: <a href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(r.source_title)}</a>, ${esc(r.source_author)} (${esc(r.source_type)}, written ${esc(r.date_written)}). Describes ${esc(r.date_described)}.</p>`; }
+function detail(){
+  const g=grids(), cell=g[sel.r][sel.c], i=rows[sel.r], place=G[sel.c];
+  let h = recHead(i) + `<p class="d-text">${esc(R[i].text)}</p>` + srcLine(i);
+  let reach;
+  if (cell.own) reach = `<p><strong>${esc(SHORT[place])}</strong> is this record's own place, so the block is woven as satin. This is a documented relationship: the source is about this place.</p>`;
+  else if (cell.lv===0) reach = `<p>At <strong>${esc(SHORT[place])}</strong>: ${mode==="model"?"neither model linked this record to anything recorded there a century or more away.":mode==="kw"?"not enough shared words with anything recorded there a century or more away.":"this shuffled draw left the block down."}</p>`;
+  else if (mode==="shuf") reach = `<p>Raised by a shuffled pairing. Records were reassigned at random before the links were applied, so this block says nothing about the town.</p>`;
+  else {
+    const k=cell.k, p=pair(i,k), gap=Math.abs(R[i].year-R[k].year);
+    reach = `<p>Rises at <strong>${esc(SHORT[place])}</strong> as ${LV[cell.lv]}, through this record from ${R[k].year}, ${gap} years ${R[k].year>R[i].year?"later":"earlier"}:</p><blockquote>${esc(R[k].text)}</blockquote>`;
+    if (mode==="model"){
+      reach += `<div class="why">${p.wa?`<span>Opus</span><span>${esc(p.wa)}</span>`:`<span>Opus</span><span>no link</span>`}${p.wb?`<span>Sonnet</span><span>${esc(p.wb)}</span>`:`<span>Sonnet</span><span>no link</span>`}</div>`;
+      reach += `<p class="gen">Strength ${(M[i][k]).toFixed(1)} of 5. Keyword rank ${p.kw} of ${D.ncross}. Reasons are generated text.</p>`;
+    } else {
+      reach += `<p class="gen">Shared words: ${p.words.map(esc).join(", ")}. Keyword score ${p.t.toFixed(3)}, rank ${p.kw} of ${D.ncross}.${M[i][k]>0?` The models also linked this pair (strength ${M[i][k].toFixed(1)}).`:" Neither model linked this pair."}</p>`;
+    }
+  }
+  document.getElementById("detail").innerHTML = h + `<div class="reach">${reach}</div>`;
+}
+function note(){
+  const t = mode==="model" ? `Raised by the two models' blind judgements, averaged. ${raisedTotal} blocks rise.`
+    : mode==="kw" ? `Raised by shared words instead, with the same number of blocks at each level. ${overlap(gridKw)} of the ${raisedTotal} raised blocks match the models' cloth.`
+    : `The models' links, applied after shuffling which record is which. This draw matches ${overlap(gridShuf)} of ${raisedTotal}; across 200 shuffles the average was about 12.`;
+  document.getElementById("modenote").textContent=t;
+}
+function render(){ draw(); detail(); note(); }
+
+cv.addEventListener("click", e=>{
+  const b=cv.getBoundingClientRect(), x=e.clientX-b.left-geo.L, y=e.clientY-b.top-geo.TOP;
+  const c=Math.floor(x/(TH*geo.s)), r=Math.floor(y/(PK*geo.s));
+  if (c>=0&&c<G.length&&r>=0&&r<rows.length){ sel={r,c}; draw(); detail(); }
+});
+cv.addEventListener("keydown", e=>{
+  const d={ArrowUp:[-1,0],ArrowDown:[1,0],ArrowLeft:[0,-1],ArrowRight:[0,1]}[e.key]; if(!d) return;
+  e.preventDefault(); sel={r:Math.min(rows.length-1,Math.max(0,sel.r+d[0])), c:Math.min(G.length-1,Math.max(0,sel.c+d[1]))}; draw(); detail();
+});
+document.querySelectorAll(".modes .seg button").forEach(btn=>btn.addEventListener("click",()=>{
+  mode=btn.dataset.mode; document.querySelectorAll(".modes .seg button").forEach(b=>b.setAttribute("aria-pressed", String(b===btn)));
+  document.getElementById("reshuffle").hidden = mode!=="shuf"; render();
+}));
+document.getElementById("reshuffle").addEventListener("click",()=>{ shufSeed++; makeShuf(); render(); });
+let rt; new ResizeObserver(()=>{ clearTimeout(rt); rt=setTimeout(draw,60); }).observe(cv.parentElement);
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", draw);
+new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+
+/* ---------- legend ---------- */
+(function legend(){
+  const el=document.getElementById("legend");
+  const items=[[4,"Satin","the record's own place"],[3,"3/1 twill","strong link"],[2,"2/2 twill","medium link"],[1,"Plain weave","faint link"],[0,"Weft-faced","no link"]];
+  let h=`<div class="legend-title">Structure (warp threads are places)</div>`;
+  items.forEach(([lv,name,desc],q)=>{ h+=`<div class="item"><canvas id="lg${q}" width="48" height="24" style="width:48px;height:24px"></canvas><span><b>${name}</b> ${desc}</span></div>`; });
+  h+=`<div class="legend-title">Weft colour (each row is a record)</div>`;
+  Object.keys(WEFT).forEach(k=>{ h+=`<div class="item"><span class="sw" style="background:${WEFT[k]}"></span><span>${STRAND[k]}</span></div>`; });
+  el.innerHTML=h;
+  items.forEach(([lv],q)=>{ const c=document.getElementById("lg"+q), x=c.getContext("2d"), dpr=window.devicePixelRatio||1;
+    c.width=48*dpr; c.height=24*dpr; x.setTransform(dpr,0,0,dpr,0,0);
+    for(let ty=0;ty<6;ty++) for(let tx=0;tx<12;tx++){ const u=up(lv,tx,ty); shadeCell(x,tx*4,ty*4,4,u,u?WARP:WEFT.textiles,tx,ty); } });
+})();
+
+/* ---------- links ---------- */
+const linkPairs = D.pairs.filter(p=>cross(p.i,p.j) && (p.a>0||p.b>0))
+  .sort((p,q)=>(M[q.i][q.j]-M[p.i][p.j]) || (Math.abs(R[q.i].year-R[q.j].year)-Math.abs(R[p.i].year-R[p.j].year)));
+const both = linkPairs.filter(p=>p.a>0&&p.b>0);
+document.getElementById("n-both").textContent=both.length; document.getElementById("n-all").textContent=linkPairs.length;
+function recBlock(i){ const r=R[i]; return `<div class="lk-rec"><div class="where"><span class="mono">${r.year}</span> · ${esc(r.site)} · ${STRAND[r.strand]}</div><p>${esc(r.text)}</p></div>`; }
+function showLinks(list){
+  document.getElementById("linklist").innerHTML = list.map(p=>{
+    const [i,j] = R[p.i].year<=R[p.j].year ? [p.i,p.j] : [p.j,p.i];
+    const kwAlso = p.kw<=50;
+    const why = `<div class="why">${p.wa?`<span>Opus</span><span>${esc(p.wa)}</span>`:""}${p.wb?`<span>Sonnet</span><span>${esc(p.wb)}</span>`:""}</div>`;
+    return `<li class="link"><div class="lk-top"><span class="strength">${M[i][j].toFixed(1)}</span><span class="badge ${kwAlso?"kw":"only"}">${kwAlso?"Keywords also":"Models only"} · keyword rank ${p.kw}/${D.ncross}</span><span class="gap">${Math.abs(R[i].year-R[j].year)} years apart</span></div><div class="lk-pair">${recBlock(i)}${recBlock(j)}</div>${why}</li>`;
+  }).join("");
+}
+const fb=document.getElementById("f-both"), fa=document.getElementById("f-all");
+fb.addEventListener("click",()=>{ fb.setAttribute("aria-pressed","true"); fa.setAttribute("aria-pressed","false"); showLinks(both); });
+fa.addEventListener("click",()=>{ fa.setAttribute("aria-pressed","true"); fb.setAttribute("aria-pressed","false"); showLinks(linkPairs); });
+showLinks(both);
+
+/* ---------- records ---------- */
+document.getElementById("reclist").innerHTML = rows.map(i=>{ const r=R[i];
+  return `<details><summary><span class="mono">${r.year}</span><span class="ttl"><b>${esc(SHORT[r.site_group]||r.site_group)}</b> · ${esc(r.text)}</span></summary><div class="rec-body"><p>${esc(r.text)}</p><p class="meta">${STRAND[r.strand]} · ${esc(r.site)} · describes ${esc(r.date_described)} · written ${esc(r.date_written)} · ${r.id}</p><p class="meta">Source: <a href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(r.source_title)}</a>, ${esc(r.source_author)} (${esc(r.source_type)})</p>${r.uncertainty?`<p class="meta">Uncertainty: ${esc(r.uncertainty)}</p>`:""}${r.check==="fixed"?`<p class="meta fixed">Fact-check: ${esc(r.check_note)}</p>`:""}</div></details>`; }).join("");
+
+render();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+</script>

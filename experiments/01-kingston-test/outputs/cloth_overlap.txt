@@ -1,0 +1,3 @@
+model lifted 65 keyword overlap 31
+shuffled overlap mean 11.685 max 20
+sources 34

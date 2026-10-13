@@ -1,0 +1,56 @@
+opus pairs 102 sonnet pairs 86 shared 73 jaccard 0.63
+strong(>=3) opus 63 sonnet 58 shared 46
+cross pairs 740 model-linked cross pairs 50 both judges 29
+keyword top-N overlap with model cross pairs: 22 of 50
+random expectation: 3.4
+same site group 11 different 39
+4.0 A4 B4 kwrank  48/740 K18(1900) K24(2010) | Factory converted into housing | Industrial building converted to housing
+3.5 A3 B4 kwrank  13/740 R12(670) R13(500) | Early battle recorded in written sources | Same 652 West Saxon-British battle
+3.5 A4 B3 kwrank   1/740 R06(1330) R07(1200) | Monastic grange barn and its dating | Two dating accounts of medieval tithe barn
+3.0 A3 B3 kwrank  17/740 R08(1000) R09(1856) | Medieval chronicle used to identify church | William of Malmesbury's account drives identification
+3.0 A3 B3 kwrank  93/740 R02(1300) R18(2020) | Community funding for structural repairs | Public fundraising for structural repairs
+3.0 A3 B3 kwrank   8/740 R01(800) R02(1300) | River crossing from ford to bridge | River crossings: ford then bridges
+3.0 A3 B3 kwrank  65/740 R11(900) R15(430) | Archaeology of early Christian worship | Early Christian remains cut into earlier floors
+3.0 A3 B3 kwrank  63/740 R08(1000) R10(700) | Conflicting dates for the Saxon church | Conflicting dating of church origins
+3.0 A3 B3 kwrank 225/740 R18(2020) R21(1852) | Repairing failing water infrastructure | Structural defect needing costly repair
+3.0 A3 B3 kwrank 683/740 R04(1700) R09(1856) | Religious building converted to secular use | Sacred building repurposed for secular use
+3.0 A3 B3 kwrank  90/740 K05(1841) K22(1992) | Industrial closure hitting local community | Workplace loss hurting town livelihoods
+3.0 A3 B3 kwrank  36/740 R01(800) R10(700) | Town grew around river ford | Town grew around river ford
+3.0 A3 B3 kwrank  22/740 R08(1000) R11(900) | Evidence for dating an early church | Aldhelm tradition tested against physical evidence
+2.5 A2 B3 kwrank 164/740 R09(1856) R14(350) | Rediscovery of forgotten ancient building | Hidden buildings revealed after long obscurity
+2.5 A3 B2 kwrank 713/740 R09(1856) R10(700) | Rediscovery of forgotten Saxon church | Conflicting discovery dates for church
+2.5 A3 B2 kwrank 327/740 R11(900) R14(350) | Chance archaeological discovery during other activity | Chance archaeological discovery
+2.5 A3 B2 kwrank  14/740 R04(1700) R05(1350) | Medieval bridge later widened or extended | Bridge later widened or supplemented
+2.5 A2 B3 kwrank   4/740 R11(900) R12(670) | Early monastic church foundation | Early minster around 705 evidence
+2.5 A2 B3 kwrank  21/740 R07(1200) R08(1000) | Physical evidence dating a building | Shaftesbury grant of about 1001
+2.5 A3 B2 kwrank 357/740 K01(1610) K06(1791) | Clothier's house and cloth business | Clothier-worker conflict
+2.5 A3 B2 kwrank 459/740 K08(1803) K23(1955) | Harsh factory working conditions | Harsh working conditions for mill workers
+2.5 A2 B3 kwrank  87/740 K08(1803) K09(1690) | Weavers and their livelihoods | Weavers' living versus working conditions
+2.0 A2 B2 kwrank 366/740 R11(900) R22(1975) | Flood-protection work beside river | Flood protection works
+2.0 A2 B2 kwrank 198/740 R02(1300) R21(1852) | Repairs to medieval stone arches | Repairs to ageing river crossing
+2.0 A2 B2 kwrank  71/740 R01(800) R05(1350) | Historic river crossing routes | Another historic river crossing
+2.0 A2 B2 kwrank 178/740 R05(1350) R20(1810) | Multi-arched river crossing structure | Multi-arched river crossing structure
+2.0 A2 B2 kwrank 704/740 R07(1200) R11(900) | Scientific dating of historic remains | Scientific dating of historic structures
+2.0 A2 B2 kwrank 447/740 K07(1756) K23(1955) | Worker-employer labour relations | Labour representation versus pay disputes
+2.0 A2 B2 kwrank   3/740 K09(1690) R20(1810) | Statutory heritage listing | Statutory heritage listing grade
+1.5 A3 B0 kwrank  37/740 K01(1610) K03(1825) | Estate house linked to cloth mill | -
+1.5 A0 B3 kwrank  42/740 R10(700) R13(500) | - | Early Saxon presence and 652
+1.5 A0 B3 kwrank  38/740 K01(1610) K07(1756) | - | Clothiers' relations with weavers
+1.5 A3 B0 kwrank   5/740 K03(1825) R19(1700) | Corn mill converted to cloth use | -
+1.0 A2 B0 kwrank 190/740 R09(1856) R15(430) | Building adapted for new function | -
+1.0 A2 B0 kwrank 695/740 R05(1350) R21(1852) | Masonry arches and later alterations | -
+1.0 A2 B0 kwrank 304/740 R08(1000) R13(500) | Later chronicle used for earlier history | -
+1.0 A2 B0 kwrank  16/740 R02(1300) R04(1700) | Medieval bridge fabric and alterations | -
+1.0 A0 B2 kwrank  59/740 R10(700) R14(350) | - | Late discovery of forgotten ancient building
+1.0 A2 B0 kwrank  24/740 R03(1650) R05(1350) | Small structure built on a bridge | -
+1.0 A0 B2 kwrank   2/740 K01(1610) R16(1820) | - | River water channelled to power mill
+1.0 A2 B0 kwrank  32/740 R18(2020) R20(1810) | Restoring waterway infrastructure | -
+1.0 A2 B0 kwrank  66/740 K17(1899) R19(1700) | Mill changing industrial use | -
+1.0 A2 B0 kwrank   9/740 K15(1849) K24(2010) | Afterlife of demolished industrial site | -
+1.0 A2 B0 kwrank 399/740 K02(1700) R09(1856) | Building reduced to humbler use | -
+1.0 A2 B0 kwrank 122/740 R13(500) R14(350) | Excavation of ancient site | -
+1.0 A0 B2 kwrank  43/740 R17(1848) R19(1700) | - | Textile mills adapted to new industry
+1.0 A0 B2 kwrank 305/740 K04(1826) R19(1700) | - | Textile mills adapting after trade decline
+1.0 A2 B0 kwrank   6/740 K17(1899) K24(2010) | Adaptive reuse of mill buildings | -
+0.5 A1 B0 kwrank 204/740 R06(1330) R08(1000) | Building attributed to religious patrons | -
+0.5 A1 B0 kwrank 210/740 K20(1956) R21(1852) | Company acquiring another enterprise | -

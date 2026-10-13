@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Fabric Through Time: studies</title>
+<style>
+  :root { color-scheme: light; }
+  body { margin: 0; background: #ece5d6; color: #1d2745; font: 13px/1.5 ui-monospace, Menlo, monospace; }
+  form { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; padding: 14px 20px; border-bottom: 1px solid #1d274533; }
+  label { display: flex; gap: 8px; align-items: center; }
+  select, input, button { font: inherit; color: inherit; background: transparent; border: 1px solid #1d274566; border-radius: 3px; padding: 4px 8px; }
+  input { width: 5em; }
+  button { cursor: pointer; }
+  #stage svg { display: block; margin: 0 auto; width: auto; height: auto; max-width: 100%; max-height: calc(100vh - 60px); }
+</style>
+<form id="controls">
+  <label>Study <select name="study"></select></label>
+  <label>Reading <select name="reading"></select></label>
+  <label>Seed <input name="seed" type="number" value="7" min="0"></label>
+  <button type="button" id="save">Save SVG</button>
+</form>
+<div id="stage"></div>
+<script type="module">
+  import { READINGS } from './lib/core.mjs';
+  import * as gather from './01-gather/sketch.mjs';
+  import * as meander from './02-meander/sketch.mjs';
+
+  const studies = [gather, meander];
+  const form = document.getElementById('controls');
+  const stage = document.getElementById('stage');
+  for (const s of studies) form.study.add(new Option(`${s.meta.id.slice(0, 2)} ${s.meta.title}`, s.meta.id));
+  for (const r of READINGS) form.reading.add(new Option(r, r));
+
+  const data = await (await fetch('../experiments/01-kingston-test/outputs/data.json')).json();
+  let current = '';
+  function draw() {
+    const study = studies.find((s) => s.meta.id === form.study.value);
+    current = study.render(data, { reading: form.reading.value, seed: Number(form.seed.value) || 0 });
+    stage.innerHTML = current;
+  }
+  form.addEventListener('input', draw);
+  document.getElementById('save').addEventListener('click', () => {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([current], { type: 'image/svg+xml' }));
+    a.download = `${form.study.value}--${form.reading.value}--seed${form.seed.value}.svg`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+  draw();
+</script>
+</html>
