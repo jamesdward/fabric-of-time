@@ -17,6 +17,8 @@
 //             river from knot to knot; bright if other links back it up, faint if not
 //
 //   node studies/05-threads/render.mjs [reading] [seed] [--png]
+//
+// --palette=file.json swaps the colours (see studies/06-colour) and --stem=name the output name.
 
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
@@ -56,6 +58,19 @@ const o = {
   laneGap: 6.5,
   fuzzy: 28, // rows of broken thread at a vague end
 };
+
+// Colours. A palette file may replace any of these.
+const flag = (key) => process.argv.find((a) => a.startsWith(`--${key}=`))?.split('=').slice(1).join('=');
+const ink = {
+  strand: { ...PALETTE.strand, rubber: '#8b8b8b', textiles: '#c0452f' },
+  affinity: PALETTE.affinity,
+  under: o.page, // the dark edge that lifts a thread off the ground
+};
+if (flag('palette')) {
+  const given = JSON.parse(readFileSync(flag('palette'), 'utf8'));
+  for (const key of ['page', 'bed', 'night', 'noon', 'moon']) if (given[key]) o[key] = given[key];
+  Object.assign(ink, { strand: given.strand, affinity: given.affinity, under: given.under });
+}
 
 const DAY = 86400000;
 const records = data.records;
@@ -155,13 +170,13 @@ for (let row = 0; row < years; row++) {
 
 const out = join(here, '../out');
 mkdirSync(out, { recursive: true });
-const stem = `05-threads--${name}--seed${seed}`;
+const stem = flag('stem') ?? `05-threads--${name}--seed${seed}`;
 writeFileSync(join(out, `${stem}--field.png`), encodePng(W, H, rgba));
 
 // Threads, knots and currents, as vectors over the ground.
 const ox = o.margin, oy = o.margin;
 const pageW = W + o.margin * 2, pageH = H + o.margin * 2;
-const colour = { ...PALETTE.strand, rubber: '#8b8b8b', textiles: '#c0452f' };
+const colour = ink.strand;
 const rowOf = (year) => Math.max(0, Math.min(years - 1, year - firstYear));
 const at = (row, lane) => [ox + xOf[row] + lane, oy + rowY[row] + o.cell / 2];
 const path = (pts) => pts.map((p, k) => (k ? 'L' : 'M') + f(p[0]) + ' ' + f(p[1])).join('');
@@ -193,7 +208,7 @@ records.forEach((r, i) => {
   for (const [r0, r1] of [[a, solidFrom], [solidTo, b]])
     if (r1 > r0) threads += `<path d="${run(r0, r1)}" stroke="${colour[r.strand]}" stroke-dasharray="2 7"/>`;
   const [kx, ky] = at(rowOf(r.year), lane[i]);
-  knots += `<circle cx="${f(kx)}" cy="${f(ky)}" r="6" fill="${colour[r.strand]}" stroke="${o.page}" stroke-width="1.6"/>`;
+  knots += `<circle cx="${f(kx)}" cy="${f(ky)}" r="6" fill="${colour[r.strand]}" stroke="${ink.under}" stroke-width="1.6"/>`;
 });
 
 const { held, slack } = corroborate(reading(data, name, seed));
@@ -217,10 +232,10 @@ const svg =
   `<rect width="100%" height="100%" fill="${o.page}"/>` +
   `<image href="${stem}--field.png" x="${ox}" y="${oy}" width="${W}" height="${H}" style="image-rendering:pixelated"/>` +
   `<g fill="none" stroke-linecap="round" stroke-linejoin="round">` +
-  `<g stroke="${o.page}" stroke-width="6" opacity="0.75">${under}</g>` +
+  `<g stroke="${ink.under}" stroke-width="6" opacity="0.75">${under}</g>` +
   `<g stroke-width="3.4">${threads}</g>` +
-  `<g stroke="${PALETTE.affinity}" opacity="0.5">${faint}</g>` +
-  `<g stroke="${PALETTE.affinity}">${bright}</g>` +
+  `<g stroke="${ink.affinity}" opacity="0.5">${faint}</g>` +
+  `<g stroke="${ink.affinity}">${bright}</g>` +
   `</g>${knots}</svg>`;
 writeFileSync(join(out, `${stem}.svg`), svg);
 

@@ -171,6 +171,43 @@ Notes and limits:
 - **The shuffled reading still looks plausible at a glance.** At seed 7 all 50 of its currents are faint, since none back each other up, but they cross the river just as gracefully.
 - All of study 04's limits on the light, the calendar and the choice of river reach still apply.
 
+## James's response to Threads and the seeded studies (13 October 2026)
+
+> this is looking really nice.
+
+> interesting experiment but i think I preferred the direction you were going. I'd like to take that and then play with the colours. I'd love to try some combinations from The Dictionary of Colour.
+
+## 06 Colour
+
+Study 05, Threads, redrawn in four-colour combinations from Sanzo Wada's *A Dictionary of Colour Combinations*. Nothing about the form changes; only the colours do.
+
+![Ten colourways](selected/06-colour--sheet.jpg)
+
+*Top row: combinations 78, 5, 31, 85, 13. Bottom row: 49, 91, 103, 63, and 56 on a pale page.*
+
+The 108 four-colour combinations were read from the swatches in the Figma community file James pointed to, and are saved in `data/colour/wada-four.json`. The numbers are each swatch's position in that file, counting along the rows. They are not the combination numbers printed in the book.
+
+How a combination's four colours are given their jobs (authored, and the same rule for every combination):
+
+- **Darkest:** the page, and the dark edge under each thread.
+- **Lightest:** the long days down the middle of the river.
+- **Of the two left, the more vivid:** the models' currents.
+- **The other:** the records' threads. The five strands are steps from that colour towards the lightest.
+- Short days and the moon are mixes of those four, so nothing outside the combination appears.
+
+![Combination 13, detail](selected/06-colour--013--detail.jpg)
+![Combination 85, detail](selected/06-colour--085--detail.jpg)
+![Combination 56 on a pale page, detail](selected/06-colour--056L--detail.jpg)
+
+Run it with `node studies/06-colour/render.mjs` for this set, or name any combinations: `node studies/06-colour/render.mjs 78 13 56L`. Add `L` to put a combination on its lightest colour as the page.
+
+Notes and limits:
+
+- **The ten were picked by Claude's eye** from the 108, leaning towards combinations with one clearly dark colour for the page. The other 98 are untried.
+- **The strands are now tints of one colour,** so they are harder to tell apart than in study 05, where each had its own hue. Four colours cannot give five strands, a ground and the currents a hue each.
+- **Which colour gets which job is a mechanical rule,** not a judgement about each combination. Some would look better with the jobs swapped by hand.
+- **The colours are the Figma file's screen values,** sampled from an image of it. They were not checked against the book.
+
 ## Seeded studies
 
 Five more, each made by a separate agent from a random string: see [`seeds/`](seeds/README.md).

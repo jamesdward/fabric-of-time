@@ -19,7 +19,7 @@ It may well go nowhere. Everything is kept in the open either way: sources, prom
 | [`data/records.json`](data/records.json) | The corpus so far: 46 sourced, fact-checked records. All are modern paraphrases, none in original wording yet. |
 | [`data/described-spans.json`](data/described-spans.json), [`data/river/`](data/river/) | The span of years each record describes (Claude's rough reading), and the River Avon's course from OpenStreetMap. |
 | [`experiments/01-kingston-test/`](experiments/01-kingston-test/) | The first experiment, made before this repository existed: do two models, reading the records blind, find links that keyword matching and a random shuffle don't? Provisionally yes, with heavy caveats. See its [write-up](experiments/01-kingston-test/WRITEUP.md). |
-| [`studies/`](studies/) | Generative sketches that turn those links into form. Five so far: [Gather, Meander, Hold, Days and Threads](studies/README.md). Plus five [seeded studies](studies/seeds/README.md), each made by a separate agent from a random string. |
+| [`studies/`](studies/) | Generative sketches that turn those links into form. Six so far: [Gather, Meander, Hold, Days, Threads and Colour](studies/README.md). Plus five [seeded studies](studies/seeds/README.md), each made by a separate agent from a random string. |
 | [`transcripts/`](transcripts/) | The conversations with AI models that shaped the project, as exported. |
 
 ## Three rules from the thesis
@@ -44,6 +44,8 @@ The project, its question and its thesis are James Ward's. Experiment 01, the co
 ## Licence and sources
 
 Code is under the [MIT licence](LICENSE). The artworks, images and writing are not yet under an open licence; that is still to be decided.
+
+The colour combinations in `data/colour/` are from Sanzo Wada's *A Dictionary of Colour Combinations*, read from a Figma community file of its swatches.
 
 The river course in `data/river/` is from OpenStreetMap, © OpenStreetMap contributors, under the Open Database Licence.
 
