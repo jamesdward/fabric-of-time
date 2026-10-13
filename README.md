@@ -18,7 +18,7 @@ It may well go nowhere. Everything is kept in the open either way: sources, prom
 | [`INSPIRATIONS.md`](INSPIRATIONS.md) | Anna Lucia, Patrik Hübner, Matt DesLauriers and Zach Lieberman, and what the project takes from each. |
 | [`data/records.json`](data/records.json) | The corpus so far: 46 sourced, fact-checked records. All are modern paraphrases, none in original wording yet. |
 | [`experiments/01-kingston-test/`](experiments/01-kingston-test/) | The first experiment, made before this repository existed: do two models, reading the records blind, find links that keyword matching and a random shuffle don't? Provisionally yes, with heavy caveats. See its [write-up](experiments/01-kingston-test/WRITEUP.md). |
-| [`studies/`](studies/) | Generative sketches that turn those links into form. Three so far: [Gather, Meander and Hold](studies/README.md). |
+| [`studies/`](studies/) | Generative sketches that turn those links into form. Four so far: [Gather, Meander, Hold and Days](studies/README.md). |
 | [`transcripts/`](transcripts/) | The conversations with AI models that shaped the project, as exported. |
 
 ## Three rules from the thesis
@@ -43,5 +43,7 @@ The project, its question and its thesis are James Ward's. Experiment 01, the co
 ## Licence and sources
 
 Code is under the [MIT licence](LICENSE). The artworks, images and writing are not yet under an open licence; that is still to be decided.
+
+The river course in `data/river/` is from OpenStreetMap, © OpenStreetMap contributors, under the Open Database Licence.
 
 The records in `data/` are paraphrases of copyrighted modern sources, each linked to its page. They are here for research. Check each source's terms before reusing them, and never present them as quotations.

@@ -109,3 +109,30 @@ Things to try next: fewer, stronger links (only those both models agreed on); le
 ## James's response to the first three (13 October 2026)
 
 > its nice [...] it doesnt emote anything tough and perhaps is taking fabric too literally. When I think about the amount of time, years, months, days, minutes and seconds that has passed through just this town and how it evolved and shifted with the time it fills me with awe and a desire to explore, to unpick and unravel each thread to find out where it goes and why. these visuals are lovely but they dont convey a sense of place or really even time. I am intrigued but im not in awe.
+
+## 04 Days
+
+Made in answer to that response. It drops the cloth and tries one thing: the scale of time, in this place.
+
+![Days](selected/04-days.png)
+
+Every day from the start of 350, the year of the earliest record, to 13 October 2026, the day it was made: 612,433 days.
+
+- **Rows:** one per year, oldest at the top. The last row stops partway, at the day of making.
+- **Columns:** the day of the year, 1 January at the left.
+- **Each cell:** that day's light at Bradford-on-Avon's latitude. Long days are pale and short days dark, so the bright band down the middle is every summer and the dark edges every winter. In the long nights the moon's phase lifts the dark a little, which makes the fine slanting grain.
+- **The shape:** each row is shifted sideways by the River Avon's real course, so time runs down the river with upstream at the top. One pixel is 2.28 metres of river.
+- **The threads at the left edge:** one for each of the 46 records, in its strand's colour, at the year it describes.
+
+![Detail around 1300](selected/04-days--detail.png)
+
+Run it with `node studies/04-days/render.mjs --png`. It is a raster image, so it is not in the browser viewer yet. Printed at one millimetre per day it would be 37 cm across the days and 1.68 m tall.
+
+Notes and limits:
+
+- **It uses none of the models' links.** By the thesis's removal test it fails outright; nothing in it came from an AI reading of the records. It is a test of whether scale alone carries feeling, before the relationships are brought back in.
+- **The records know a year, not a day,** and the year is the single focal year chosen in experiment 01. A thread marks a year's row and nothing finer.
+- **The light is calculated, not recorded.** Day length comes from latitude and the date, with today's tilt of the Earth and no weather. The moon uses the average lunar month counted back from 2000, so its phase drifts from the true one in the early centuries. Dates use today's calendar throughout, not the one in use at the time.
+- **The reach of river is Claude's choice:** 11.5 km of the Avon from about 51.353°N 2.176°W down to 51.338°N 2.294°W, stopping before the river turns north. James knows where the town's river begins and ends better than a bounding box does.
+- **The river's shape is slightly stretched,** because rows follow distance along the river, not a straight map axis.
+- River course from OpenStreetMap (`data/river/avon-course.json`), © OpenStreetMap contributors, under the Open Database Licence.
