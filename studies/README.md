@@ -222,6 +222,39 @@ Made with `node studies/06-colour/render.mjs 56L 85L 63L 103L 70L 81L 30L 3L 50L
 - **The threads and currents are weaker here.** Inside the dark strip they are tints and mid-tones on a mid-tone ground, and at sheet size they nearly vanish. The colour rule was built for dark pages and has not been reworked for pale ones.
 - **The middle of the river goes grey-green in several,** because pale dots sit on a dark bed and the eye mixes them.
 
+## James's response to the pale-paper colourways (13 October 2026)
+
+> hmm yeah not working. lets go brighter. love this anna lucia piece
+
+He attached a screenshot of a work by Anna Lucia: columns of flat, bright blocks on pale paper, many of them two colours mixed in a fine checker. The image is not stored here because it is her work.
+
+## 07 Bands
+
+The river of days on pale paper, in flat bright colour. The days themselves now carry the records, so the separate threads of study 05 are gone.
+
+![Bands under the models' reading](selected/07-bands--models--seed7.jpg)
+
+- **Ground:** every day from 230 to 13 October 2026 is still one square, 656,262 of them. Rows are years, columns are days of the year, and the river's course shifts each row. The gaps between months, decades and centuries are bare paper.
+- **Bands:** in each year the row is shared out among the places that have a record describing that year, in proportion to how many. A place keeps its left-to-right order and its colour all the way down. A band begins where a place's first record begins and steps wider or narrower as records start and stop.
+- **Weave:** inside a band every other square takes the colour of a strand (river, settlement, textiles, rubber, people) of the records there. So each block is two colours mixed by the eye: place as warp, strand as weft, which is the rule experiment 01's test cloth began with.
+- **Knots:** each record, at the year experiment 01 filed it under.
+- **Tracks:** the models' links, drawn in the paper's colour as if a thread had been pulled out of the cloth. Wide if other links back it up (study 03's rule), fine if not.
+
+![Detail, the 1700s to the 1900s](selected/07-bands--detail.jpg)
+![Detail, around 900 to 1100](selected/07-bands--detail-early.jpg)
+
+Run it with `node studies/07-bands/render.mjs models 7 --png`.
+
+Notes and limits:
+
+- **How close this is to the Anna Lucia piece.** What is taken from it is general: pale paper, flat saturated colour, and two colours mixed in a checker, which is also simply how woven cloth mixes colour. The layout is not hers: here it is the river's course, the calendar and the records' spans that decide where every block falls. But the family resemblance is deliberate and should be said out loud.
+- **A band's width is a share of the records, not a share of history.** Kingston Mill fills the 1800s because the research looked hardest there. The thesis warns about archive density turning into visual weight; this study shows that density openly but does not correct for it.
+- **A square's colour does not mean that day belonged to that place.** The year's days are only being used as the units a year is shared out in.
+- **The palette is Claude's choice:** twelve place colours and five strand colours, each one a colour that appears somewhere in Wada's combinations, but together they are not one of his combinations. The early centuries come out duller than the rest because the stone colour used for the settlement strand greys whatever it is woven with.
+- **The slanting stripes in the Kingston Mill block** come from the order in which strands take turns, not from anything in the records.
+- **Shuffled links still look plausible.** At seed 7 they are all fine tracks with no wide ones, but they cross the river just as easily.
+- The spans, the light, the calendar and the river reach carry the same limits as in studies 04 and 05.
+
 ## Seeded studies
 
 Five more, each made by a separate agent from a random string: see [`seeds/`](seeds/README.md).

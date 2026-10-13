@@ -8,7 +8,7 @@ The idea is to use a contemporary machine's learned associations to weave togeth
 
 It may well go nowhere. Everything is kept in the open either way: sources, prompts, model judgements, code and the dead ends.
 
-![Study 05, Threads (detail)](studies/selected/05-threads--detail.png)
+![Study 07, Bands (detail)](studies/selected/07-bands--detail.jpg)
 
 ## What's here
 
@@ -19,7 +19,7 @@ It may well go nowhere. Everything is kept in the open either way: sources, prom
 | [`data/records.json`](data/records.json) | The corpus so far: 46 sourced, fact-checked records. All are modern paraphrases, none in original wording yet. |
 | [`data/described-spans.json`](data/described-spans.json), [`data/river/`](data/river/) | The span of years each record describes (Claude's rough reading), and the River Avon's course from OpenStreetMap. |
 | [`experiments/01-kingston-test/`](experiments/01-kingston-test/) | The first experiment, made before this repository existed: do two models, reading the records blind, find links that keyword matching and a random shuffle don't? Provisionally yes, with heavy caveats. See its [write-up](experiments/01-kingston-test/WRITEUP.md). |
-| [`studies/`](studies/) | Generative sketches that turn those links into form. Six so far: [Gather, Meander, Hold, Days, Threads and Colour](studies/README.md). Plus five [seeded studies](studies/seeds/README.md), each made by a separate agent from a random string. |
+| [`studies/`](studies/) | Generative sketches that turn those links into form. Seven so far: [Gather, Meander, Hold, Days, Threads, Colour and Bands](studies/README.md). Plus five [seeded studies](studies/seeds/README.md), each made by a separate agent from a random string. |
 | [`transcripts/`](transcripts/) | The conversations with AI models that shaped the project, as exported. |
 
 ## Three rules from the thesis
