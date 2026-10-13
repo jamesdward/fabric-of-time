@@ -170,3 +170,7 @@ Notes and limits:
 - **The removal test is back in play:** with reading `none` the orange currents vanish. The threads and the ground stay, because they come from the records and the calendar, not from the models.
 - **The shuffled reading still looks plausible at a glance.** At seed 7 all 50 of its currents are faint, since none back each other up, but they cross the river just as gracefully.
 - All of study 04's limits on the light, the calendar and the choice of river reach still apply.
+
+## Seeded studies
+
+Five more, each made by a separate agent from a random string: see [`seeds/`](seeds/README.md).
