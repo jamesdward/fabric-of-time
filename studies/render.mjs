@@ -12,6 +12,7 @@ import { fileURLToPath } from 'node:url';
 import { READINGS, PALETTE } from './lib/core.mjs';
 import * as gather from './01-gather/sketch.mjs';
 import * as meander from './02-meander/sketch.mjs';
+import * as hold from './03-hold/sketch.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const out = join(here, 'out');
@@ -32,7 +33,7 @@ function toPng(svgPath, width, height) {
 }
 
 mkdirSync(out, { recursive: true });
-for (const study of [gather, meander]) {
+for (const study of [gather, meander, hold]) {
   const { id, width, height } = study.meta;
   if (only && only !== id) continue;
   const inner = [];

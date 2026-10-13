@@ -24,8 +24,9 @@
   import { READINGS } from './lib/core.mjs';
   import * as gather from './01-gather/sketch.mjs';
   import * as meander from './02-meander/sketch.mjs';
+  import * as hold from './03-hold/sketch.mjs';
 
-  const studies = [gather, meander];
+  const studies = [gather, meander, hold];
   const form = document.getElementById('controls');
   const stage = document.getElementById('stage');
   for (const s of studies) form.study.add(new Option(`${s.meta.id.slice(0, 2)} ${s.meta.title}`, s.meta.id));

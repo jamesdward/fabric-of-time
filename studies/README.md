@@ -58,13 +58,44 @@ Time as one narrow band of cloth, laid out oldest to newest, then pulled into fo
 
 *Models, keywords, shuffled, none.*
 
+## 03 Hold
+
+![Hold under the models' reading](selected/03-hold--models--seed7.png)
+
+Made in answer to the weakness of the first two: under them, a shuffled reading looked as lively as the models' one. Here a link only takes tension when other links back it up.
+
+- **Warp, height, coloured bands:** as study 01.
+- **Held links:** a link is held when its two records are both linked to some third record. Held links are drawn taut and are the only ones that gather the cloth.
+- **Woven patches:** three records that all hold each other are cross-hatched shut.
+- **Slack threads:** every other link hangs loose and moves nothing.
+
+![Hold under all four readings](selected/03-hold--compare--seed7.png)
+
+*Models, keywords, shuffled, none.*
+
+Why this separates the readings: links that mean something tend to agree with each other, and random ones rarely do.
+
+| Reading | Held links, of 50 | Triangles |
+|---|---|---|
+| Models | 16 | 7 |
+| Keywords | 6 | 2 |
+| Shuffled, seed 7 (shown) | 0 | 0 |
+| Shuffled, average of 1,000 draws | 5.0 | 1.7 (200 draws) |
+
+Seed 7 is a kind draw for this comparison: it happens to have no held links at all. A typical shuffle has a few, so a typical shuffled cloth shows one or two small tucks. 7 of the 1,000 shuffles had 16 or more held links, the models' figure.
+
+What it shows about the models' reading, which is less flattering:
+
+- **Six of the seven woven patches join settlement records to settlement records,** and the seventh joins three river records. The cloth is held together in the early centuries and along the river, and nowhere else. No patch crosses strands.
+- **34 of the models' 50 links stay inside one strand** (a shuffle averages 9.4, and never passed 17 in 1,000 draws). The judges never saw the strand labels, so they found the strands again on their own. That is evidence they read the records sensibly. It also means they mostly did not do what the thesis hoped for, which is to connect across the categories the project started with. Only 16 links cross strands.
+
 ## Colour
 
 Authored, not derived from data. Indigo warp on an undyed ground. Record bands by strand: river (blue-grey), settlement (stone), textiles (madder red), rubber (carbon black), people (weld yellow). The models' affinities are a synthetic orange that sits outside that palette, so the interpretive layer can't be mistaken for the documented one.
 
 ## What these first two show, and don't
 
-Written by Claude on 13 October 2026, straight after making them.
+Written by Claude on 13 October 2026, straight after making the first two. Study 03 came from the second point.
 
 - **Both pass the removal test trivially.** With no links, Gather is a flat cloth and Meander is a straight strip.
 - **Neither clearly passes the shuffled test.** In both, the shuffled version is as lively as the models' version. Nearly every record gets a stitch under every reading, so the cloth puckers everywhere either way; what changes is direction and which moments touch. A viewer can't yet see the difference between a meaningful link and an arbitrary one. That is the main thing to fix in the grammar.
@@ -74,3 +105,7 @@ Written by Claude on 13 October 2026, straight after making them.
 - **Claude chose both grammars and wrote the code.** By the thesis's own standard that is not the AI contribution that matters, and the mappings are James's to keep, change or throw out.
 
 Things to try next: fewer, stronger links (only those both models agreed on); letting link strength alone decide what is visible, so weak links leave the cloth nearly flat; pulling only across time in Gather so places stay as straight warp; a Meander with documented same-place links as a second kind of stitch.
+
+## James's response to the first three (13 October 2026)
+
+> its nice [...] it doesnt emote anything tough and perhaps is taking fabric too literally. When I think about the amount of time, years, months, days, minutes and seconds that has passed through just this town and how it evolved and shifted with the time it fills me with awe and a desire to explore, to unpick and unravel each thread to find out where it goes and why. these visuals are lovely but they dont convey a sense of place or really even time. I am intrigued but im not in awe.
