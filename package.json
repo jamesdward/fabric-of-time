@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "render": "node studies/render.mjs --png && node studies/04-days/render.mjs --png",
+    "render": "node studies/render.mjs --png && node studies/04-days/render.mjs --png && node studies/05-threads/render.mjs models 7 --png",
     "serve": "python3 -m http.server 4173"
   }
 }

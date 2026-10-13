@@ -8,17 +8,18 @@ The idea is to use a contemporary machine's learned associations to weave togeth
 
 It may well go nowhere. Everything is kept in the open either way: sources, prompts, model judgements, code and the dead ends.
 
-![Study 01, Gather](studies/selected/01-gather--models--seed7.png)
+![Study 05, Threads (detail)](studies/selected/05-threads--detail.png)
 
 ## What's here
 
 | | |
 |---|---|
 | [`thesis/project-thesis.md`](thesis/project-thesis.md) | The working thesis: what the project claims, and the tests it sets itself. |
-| [`INSPIRATIONS.md`](INSPIRATIONS.md) | Anna Lucia, Patrik Hübner, Matt DesLauriers and Zach Lieberman, and what the project takes from each. |
+| [`INSPIRATIONS.md`](INSPIRATIONS.md) | Anna Lucia, Patrik Hübner, Matt DesLauriers, Zach Lieberman and Giorgia Lupi, and what the project takes from each. |
 | [`data/records.json`](data/records.json) | The corpus so far: 46 sourced, fact-checked records. All are modern paraphrases, none in original wording yet. |
+| [`data/described-spans.json`](data/described-spans.json), [`data/river/`](data/river/) | The span of years each record describes (Claude's rough reading), and the River Avon's course from OpenStreetMap. |
 | [`experiments/01-kingston-test/`](experiments/01-kingston-test/) | The first experiment, made before this repository existed: do two models, reading the records blind, find links that keyword matching and a random shuffle don't? Provisionally yes, with heavy caveats. See its [write-up](experiments/01-kingston-test/WRITEUP.md). |
-| [`studies/`](studies/) | Generative sketches that turn those links into form. Four so far: [Gather, Meander, Hold and Days](studies/README.md). |
+| [`studies/`](studies/) | Generative sketches that turn those links into form. Five so far: [Gather, Meander, Hold, Days and Threads](studies/README.md). |
 | [`transcripts/`](transcripts/) | The conversations with AI models that shaped the project, as exported. |
 
 ## Three rules from the thesis

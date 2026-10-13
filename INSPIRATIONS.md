@@ -1,6 +1,6 @@
 # Inspirations
 
-Four practices this project looks to. They are named here as influences to learn from, not sources to reproduce: nothing in this repository copies their code, patterns or imagery.
+Five practices this project looks to. They are named here as influences to learn from, not sources to reproduce: nothing in this repository copies their code, patterns or imagery.
 
 The descriptions of each practice are taken from the artists' own sites (read 13 October 2026). The "what this project takes from it" notes are a first draft by Claude and should be replaced with James's own words.
 
@@ -63,6 +63,28 @@ Works that sit closest to this project:
 - **openFrameworks** and **SFPC**, as open tools and open teaching.
 
 What this project takes from it: the sketch as the unit of work. Make many small studies, quickly, and let the body of work show what deserves to grow. The `studies/` folder follows that habit. And the idea that code can be poetic about its subject, which is the gap this project has to cross: from a diagram of a town's records to something felt.
+
+## Giorgia Lupi
+
+<https://giorgialupi.com/>
+
+Information designer and partner at Pentagram, where she leads an information design team. She calls her approach Data Humanism: "an approach that reclaims the human side of data."
+
+Her manifesto, *Data Humanism* (first published in Print magazine), sets out principles that speak directly to this project:
+
+- **Embrace complexity.** "It is impractical to avoid a certain level of visual complexity." Layered, dense work invites slower and deeper reading.
+- **Move beyond standards.** "One size does not fit all." Draw with the data to find "what is unique about the numbers at hand."
+- **Sneak context in, always.** "Data is a tool that filters reality in a highly subjective way."
+- **Remember that data is imperfect, as we are.** "Data is primarily human-made." Show uncertainty and error instead of implying truth.
+
+Works that sit closest to this project:
+
+- **Dear Data**, the project her manifesto uses to show how subjective data collection is.
+- **My Life with Long Covid** ("1374 Days"): a visual essay for The New York Times that counts a stretch of time day by day.
+- **In Defense of the Detour** (2026): a visual essay for The New York Times on AI and the creative process.
+- **& Other Stories**: a fashion collection driven by data.
+
+What this project takes from it: every data point is somebody's small, imperfect account of something, and deserves its own mark with its own detail. For this corpus that means showing what a record actually says about time (a vague span, a broken end, a single year) instead of flattening it to a dot, and letting the density of that detail be what rewards looking closely. Added at James's suggestion after study 04, which he found had lost "all of the sense of data and connection and differentiation".
 
 ## On influence and originality
 

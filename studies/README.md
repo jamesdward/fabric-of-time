@@ -136,3 +136,37 @@ Notes and limits:
 - **The reach of river is Claude's choice:** 11.5 km of the Avon from about 51.353°N 2.176°W down to 51.338°N 2.294°W, stopping before the river turns north. James knows where the town's river begins and ends better than a bounding box does.
 - **The river's shape is slightly stretched,** because rows follow distance along the river, not a straight map axis.
 - River course from OpenStreetMap (`data/river/avon-course.json`), © OpenStreetMap contributors, under the Open Database Licence.
+
+## James's response to Days (13 October 2026)
+
+> nice, I like it, I dont love having written dates etc it removes from the art - i wonder if we can use grid lines or sections to part the years. another reference to deep dive into is Giorgia Liupi
+>
+> what I like - the drama from the river and starting to get a sense of epicness
+> what i think is missing - it feels like it lacks detail, it looks like a blurry gradient - we've lost all of the sense of data and connection and differentiation. The overall shape is visually pleasing but it now conveys nothing beyond a shape of a river
+
+## 05 Threads
+
+The river of days, with the records and their links put back in it and all lettering taken out.
+
+![Threads under the models' reading](selected/05-threads--models--seed7.png)
+
+- **Ground:** every day from the start of 230 to 13 October 2026 as a dot: 656,262 of them. Rows are years and columns are days of the year. The dot is larger and paler the longer that day's light.
+- **Gaps instead of dates:** a dark column between months, a hairline between decades and a wider break between centuries. There are eighteen century breaks down the piece.
+- **Shape:** rows shifted sideways by the River Avon's real course, as in study 04.
+- **Threads:** one per record, in its strand's colour, running down the river for the whole span of years the record describes. Some describe a single year; one runs for more than a thousand. Where the source is vague about a beginning or an end ("medieval", "before 1856"), that end of the thread is broken into dots. A thread that reaches the top edge began before the frame.
+- **Knots:** the single year experiment 01 filed each record under.
+- **Lanes:** threads from the same place run side by side, so the eighteen Kingston Mill records travel as one bundle.
+- **Orange currents:** one per link in the chosen reading, drifting across the river from knot to knot. Bright if other links back it up (study 03's rule), faint if not.
+
+![Detail, the 1700s to the 1900s](selected/05-threads--detail.png)
+
+Run it with `node studies/05-threads/render.mjs models 7 --png`. The first argument is the reading.
+
+Notes and limits:
+
+- **The spans are new data, and Claude's reading.** `data/described-spans.json` turns each record's free-text "date described" into a from and a to. Whole centuries stand in for phrases like "13th century". Nobody has checked them against the sources.
+- **The frame now starts at 230,** the earliest year any span names, instead of 350.
+- **Lane position across the river means place, but the ground's columns mean day of the year.** A thread's sideways position says nothing about the season. Two meanings share one axis, which is a weakness.
+- **The removal test is back in play:** with reading `none` the orange currents vanish. The threads and the ground stay, because they come from the records and the calendar, not from the models.
+- **The shuffled reading still looks plausible at a glance.** At seed 7 all 50 of its currents are faint, since none back each other up, but they cross the river just as gracefully.
+- All of study 04's limits on the light, the calendar and the choice of river reach still apply.
