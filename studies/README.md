@@ -208,6 +208,20 @@ Notes and limits:
 - **Which colour gets which job is a mechanical rule,** not a judgement about each combination. Some would look better with the jobs swapped by hand.
 - **The colours are the Figma file's screen values,** sampled from an image of it. They were not checked against the book.
 
+### Pale paper
+
+James, on seeing the first sheet: "when the paper is the lightest colour it works best". So, ten more with the lightest colour as the paper:
+
+![Ten colourways on pale paper](selected/06-colour--sheet-pale.jpg)
+
+*Top row: combinations 56, 85, 63, 103, 70. Bottom row: 81, 30, 3, 50, 96.*
+
+Made with `node studies/06-colour/render.mjs 56L 85L 63L 103L 70L 81L 30L 3L 50L 96L`.
+
+- **The river now reads as a solid dark shape on the paper,** which gives the silhouette more weight than the dark pages did.
+- **The threads and currents are weaker here.** Inside the dark strip they are tints and mid-tones on a mid-tone ground, and at sheet size they nearly vanish. The colour rule was built for dark pages and has not been reworked for pale ones.
+- **The middle of the river goes grey-green in several,** because pale dots sit on a dark bed and the eye mixes them.
+
 ## Seeded studies
 
 Five more, each made by a separate agent from a random string: see [`seeds/`](seeds/README.md).
