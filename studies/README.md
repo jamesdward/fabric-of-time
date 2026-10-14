@@ -255,6 +255,39 @@ Notes and limits:
 - **Shuffled links still look plausible.** At seed 7 they are all fine tracks with no wide ones, but they cross the river just as easily.
 - The spans, the light, the calendar and the river reach carry the same limits as in studies 04 and 05.
 
+## James's response to Bands (14 October 2026)
+
+> okay love it. new experiment - if we were to remove the river motif and plot on a map or a map of the town over time or something more location based how would that work
+
+Claude proposed three ways (time as height above the map, time as rings around each place, time as a sequence of maps) and recommended rings. James: "lets try it".
+
+## 08 Rings
+
+The river motif set aside for a plan of the town. Each place grows rings, one per year, but only for the years some record describes it.
+
+![Rings under the models' reading](selected/08-rings--models--seed7.jpg)
+
+- **Plan:** today's buildings, roads, railway, river and canal from OpenStreetMap (`data/town/plan.json`), drawn faint.
+- **Places:** eleven of experiment 01's twelve places, located with OpenStreetMap (`data/places.json`). Four are approximate stand-ins, and the file says which and why.
+- **Rings:** the present is at each place's centre and the deep past is the widest ring, so the same distance from a centre is the same year at every place. A place with old records is a wide hoop; one whose records are all recent is a small disc. Colours are study 07's: the place's colour woven with the strand colours, the ring shared out between that year's records as wedges.
+- **Gaps:** a hairline of paper at every century. Where places overlap, their century lines cross into a lattice.
+- **Overlap:** where two places' rings cover the same ground, the more recent year lies on top.
+- **Town-wide records** have no single place. Each is a fine dashed circle around the middle of the located places, at the radius of its year.
+- **Tracks:** the models' links, in the paper's colour, leaving each record's ring on the side facing the other record. Links within one place run straight out along a radius.
+
+![Detail, the town centre](selected/08-rings--detail.jpg)
+
+Run it with `node studies/08-rings/render.mjs models 7 --png`.
+
+Notes and limits:
+
+- **The rings' size is time, not area.** A 600-pixel ring is about 600 metres on the plan, but it means 1,796 years, not a place that large. Big rings cover ground that has nothing to do with them.
+- **The town centre is crowded.** The two churches, Abbey Mill, Middle Rank and Town Bridge are all within about 250 metres, so their rings pile up. More recent years on top is a rule for reading the pile, not a fact about the town.
+- **The plan is today's town.** The buildings and roads under a ring for the year 700 are modern. A map that changes with time would need historic maps, whose licences have not been checked.
+- **Four locations are approximate:** the Roman villa (the school's centre, not its pitch), Budbury hillfort (the middle of the Budbury streets), Kingston Mill and The Hall (midway between them) and Greenland Mill (the street named after it).
+- **Every year inside a span is drawn as recorded.** A ring says a record describes that year, not that anything happened in it.
+- **Shuffled links still look plausible** (rendered alongside, not shown). The rings themselves come from the records and do not change with the reading.
+
 ## Seeded studies
 
 Five more, each made by a separate agent from a random string: see [`seeds/`](seeds/README.md).

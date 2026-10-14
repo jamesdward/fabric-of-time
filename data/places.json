@@ -1,0 +1,16 @@
+{
+  "note": "Where each of experiment 01's places is, for plotting on a map. Located by Claude on 14 October 2026 with OpenStreetMap's Nominatim search, using the records' own descriptions to choose between results. `osm` names the feature the point came from. `certainty` says how far to trust the point: 'feature' is the building or structure itself; 'approximate' is a nearby stand-in. 'Town-wide' has no point and is left out on purpose. Coordinates © OpenStreetMap contributors, ODbL.",
+  "places": {
+    "Roman villa site": { "lat": 51.35199, "lon": -2.25974, "osm": "way/73242535 (St Laurence School)", "certainty": "approximate", "why": "R14 says the villa lies under St Laurence School's football pitch; this is the school's centre, not the pitch." },
+    "Budbury hillfort": { "lat": 51.34890, "lon": -2.25730, "osm": "ways 38554456, 38554454, 60108229 (Budbury Close, Place, Circle)", "certainty": "approximate", "why": "The hillfort has no mapped outline here; this is the middle of the Budbury streets that now cover the area." },
+    "St Laurence church": { "lat": 51.34703, "lon": -2.25384, "osm": "way/126502502", "certainty": "feature" },
+    "Holy Trinity church": { "lat": 51.34671, "lon": -2.25396, "osm": "way/79914204", "certainty": "feature" },
+    "Barton (barn & bridge)": { "lat": 51.34272, "lon": -2.25534, "osm": "way/126504516 (Tithe Barn)", "certainty": "feature", "why": "The group also holds Barton Bridge, a short walk south-west of the barn." },
+    "Town Bridge": { "lat": 51.34701, "lon": -2.25094, "osm": "way/661129833", "certainty": "feature" },
+    "Kingston Mill & The Hall": { "lat": 51.34680, "lon": -2.24780, "osm": "way/1381082253 (The Hall) and way/59191128 (Kingston Road)", "certainty": "approximate", "why": "Midway between The Hall and the riverside mill site on Kingston Road, since the group covers both." },
+    "Middle Rank": { "lat": 51.34781, "lon": -2.25487, "osm": "way/110389443", "certainty": "feature" },
+    "Avoncliff": { "lat": 51.33882, "lon": -2.28236, "osm": "way/655257121 (Avoncliff Aqueduct)", "certainty": "feature", "why": "The group covers the aqueduct, the weir and the mills; the aqueduct stands for all three." },
+    "Abbey Mill": { "lat": 51.34760, "lon": -2.25234, "osm": "node/3774369254", "certainty": "feature" },
+    "Greenland Mill": { "lat": 51.34440, "lon": -2.24484, "osm": "way/189198593 (Greenland Mills, the street)", "certainty": "approximate", "why": "The mill buildings are not named in OpenStreetMap; this is the street that bears their name." }
+  }
+}
