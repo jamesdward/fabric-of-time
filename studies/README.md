@@ -288,6 +288,22 @@ Notes and limits:
 - **Every year inside a span is drawn as recorded.** A ring says a record describes that year, not that anything happened in it.
 - **Shuffled links still look plausible** (rendered alongside, not shown). The rings themselves come from the records and do not change with the reading.
 
+### Woven crossings
+
+James: "I especially love the visible bridge between the town and avoncliff. is there a way we can interweave the rings when they overlap rather than them block out the rings beneath".
+
+So now, where places' rings cover the same ground, they are woven, not stacked. Each place's rings are bundled into threads 40 years wide. Where two threads cross, one passes over, and at the next crossing it passes under, as in plain weave; with three or more places the turn passes round them all. The thread on top has a darkened edge, so it reads as lying over the other. Century hairlines only show where a place is alone, so the crossings stay solid.
+
+![Rings, woven](selected/08-rings--woven.jpg)
+![Where the Roman villa's and Budbury's rings cross](selected/08-rings--woven-crossing.jpg)
+![Detail, the town centre, woven](selected/08-rings--woven-detail.jpg)
+
+This is now the default. `--overlap=stack` brings back the first version, where the more recent year lay on top. Twenty-year threads were tried first; at that width the crossings in the town centre broke into confetti, so the threads were doubled.
+
+- **The two rim-to-rim crossings, where the villa and Budbury hoops pass through each other, read most clearly as cloth.**
+- **The town centre is still dense.** Up to five places cross there, and a five-way weave is busy, though no place now hides another.
+- **Which thread goes over is set by the weave's own alternation, not by anything in the records.**
+
 ## Seeded studies
 
 Five more, each made by a separate agent from a random string: see [`seeds/`](seeds/README.md).

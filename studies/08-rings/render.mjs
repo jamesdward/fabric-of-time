@@ -10,15 +10,18 @@
 //   rings     a ring per year at each located place, coloured as in study 07: the
 //             place's colour woven with the strand colours of the records there,
 //             the ring shared out between those records as wedges
-//   overlap   where two places' rings cover the same ground, the more recent year
-//             lies on top, as later activity lies over earlier
+//   overlap   where places' rings cover the same ground they are woven: each place's
+//             rings are bundled into threads of `threadYears`, and at every crossing
+//             of two threads one passes over and the next under, as in plain weave.
+//             The thread passing over is edged in shadow. (--overlap=stack instead
+//             lays the more recent year on top, as the first version did.)
 //   gaps      bare paper between centuries
 //   town-wide records, which have no single place, are each a fine dashed circle
 //             around the middle of the located places, at the radius of their year
 //   tracks    the links of the chosen reading, in the paper's colour, leaving each
 //             record's ring on the side that faces the other record
 //
-//   node studies/08-rings/render.mjs [reading] [seed] [--png]
+//   node studies/08-rings/render.mjs [reading] [seed] [--png] [--overlap=stack]
 
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
@@ -46,6 +49,8 @@ const o = {
   margin: 160,
   until: 2026,
   maxRadius: 600, // the earliest year, in pixels from a place's centre
+  threadYears: 40, // how many years of rings make one thread where places cross
+  shadow: 0.24, // how much the edge of an over-thread is darkened
   centuryGap: 2.2,
   paper: '#f5ecc2',
   ink: '#111314',
@@ -105,7 +110,7 @@ function colourAt(site, x, y) {
   const year = Math.floor(exact);
   // a hairline of paper where one century meets the next
   const toCentury = Math.abs(exact - Math.round(exact / 100) * 100);
-  if (toCentury < (o.centuryGap / o.maxRadius) * yearSpan / 2) return { c: paper, r };
+  if (toCentury < (o.centuryGap / o.maxRadius) * yearSpan / 2) return { c: paper, r, gap: true };
   const here = site.list.filter((i) => active(i, year));
   if (!here.length) return null;
   const turn = (Math.atan2(dy, dx) / (2 * Math.PI) + 1.25) % 1; // 0 at north, clockwise
@@ -114,23 +119,41 @@ function colourAt(site, x, y) {
   return { c: weft ? strandRgb[records[record].strand] : site.colour, r };
 }
 
+const stack = process.argv.includes('--overlap=stack');
+const threadPx = (o.threadYears / yearSpan) * o.maxRadius;
 const rgba = new Uint8Array(W * H * 4);
 for (let y = 0; y < H; y++)
   for (let x = 0; x < W; x++) {
-    let pick = null;
+    const hits = [];
     for (const site of sites) {
       if (site.town) continue;
       const hit = colourAt(site, x, y);
-      if (hit && (!pick || hit.r < pick.r)) pick = hit;
+      if (hit) hits.push(hit);
     }
-    if (!pick) continue;
+    if (!hits.length) continue;
+    let pick, c;
+    if (stack || hits.length === 1) {
+      pick = hits.reduce((a, b) => (b.r < a.r ? b : a));
+      c = pick.c;
+    } else {
+      // plain weave: each place's thread here is its ring band; the crossing's over/under
+      // alternates from one band to the next, for every place in the crossing
+      const bands = hits.map((h) => Math.floor(h.r / threadPx));
+      const turn = bands.reduce((n, k) => n + k, 0);
+      pick = hits[turn % hits.length];
+      // a century's hairline only shows where one place is alone; inside a crossing the other thread fills it
+      if (pick.gap) pick = hits.find((h) => !h.gap) ?? pick;
+      const along = (pick.r / threadPx) % 1;
+      const edge = 1.2 / threadPx;
+      c = along < edge || along > 1 - edge ? pick.c.map((v) => Math.round(v * (1 - o.shadow))) : pick.c;
+    }
     const at = (y * W + x) * 4;
-    rgba[at] = pick.c[0]; rgba[at + 1] = pick.c[1]; rgba[at + 2] = pick.c[2]; rgba[at + 3] = 255;
+    rgba[at] = c[0]; rgba[at + 1] = c[1]; rgba[at + 2] = c[2]; rgba[at + 3] = 255;
   }
 
 const out = join(here, '../out');
 mkdirSync(out, { recursive: true });
-const stem = `08-rings--${name}--seed${seed}`;
+const stem = `08-rings--${name}--seed${seed}${stack ? '--stack' : ''}`;
 writeFileSync(join(out, `${stem}--field.png`), encodePng(W, H, rgba));
 
 // The plan, faint, over the paper and under the rings' gaps.
