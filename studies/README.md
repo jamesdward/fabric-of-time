@@ -304,6 +304,22 @@ This is now the default. `--overlap=stack` brings back the first version, where 
 - **The town centre is still dense.** Up to five places cross there, and a five-way weave is busy, though no place now hides another.
 - **Which thread goes over is set by the weave's own alternation, not by anything in the records.**
 
+### Threads, crossing like hatching
+
+James, on the woven blocks: "that looks messy - i think it needs to visually more like cross hatched threading".
+
+So each place's rings are now drawn as threads: fine concentric lines, one about every 18 years, alternating between the place's colour and its strand colours, with the plan showing between them. Where two places' rings overlap, the two families of curves cross like hatching, and at each crossing point the thread on top alternates. A century is a missing thread.
+
+![Rings as threads](selected/08-rings--threads.jpg)
+![Where the Roman villa's and Budbury's threads cross](selected/08-rings--threads-crossing.jpg)
+![Detail, the town centre, threads](selected/08-rings--threads-detail.jpg)
+
+This is now the default; `--overlap=stack` still gives the stacked version, now drawn in threads too. The woven-block version above is kept as images only.
+
+- **Crossings are clean now:** where rings cross at an angle they read as hatching, and the map stays legible under them.
+- **Where two places sit close together, their rings are nearly concentric** (the churches, Abbey Mill and Town Bridge), and the threads interfere into a moiré of short dashes rather than a clear hatch.
+- **The colour is lighter overall** than the solid version, because a third of every ring is now paper.
+
 ## Seeded studies
 
 Five more, each made by a separate agent from a random string: see [`seeds/`](seeds/README.md).

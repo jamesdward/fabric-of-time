@@ -7,15 +7,14 @@
 //
 // Mapping (all authored, see studies/README.md):
 //   plan      today's buildings, roads and water from OpenStreetMap, faint
-//   rings     a ring per year at each located place, coloured as in study 07: the
-//             place's colour woven with the strand colours of the records there,
-//             the ring shared out between those records as wedges
-//   overlap   where places' rings cover the same ground they are woven: each place's
-//             rings are bundled into threads of `threadYears`, and at every crossing
-//             of two threads one passes over and the next under, as in plain weave.
-//             The thread passing over is edged in shadow. (--overlap=stack instead
-//             lays the more recent year on top, as the first version did.)
-//   gaps      bare paper between centuries
+//   rings     drawn as threads: concentric lines round each located place, one for
+//             every few years recorded there, alternating between the place's colour
+//             and the strand colours of its records, shared out as wedges when several
+//             records describe the same years. The plan shows between the threads.
+//   overlap   where two places' rings cover the same ground, their threads cross like
+//             hatching, and at each crossing the one on top alternates, as in plain
+//             weave. (--overlap=stack lays the more recent year on top instead.)
+//   gaps      a missing thread at every century
 //   town-wide records, which have no single place, are each a fine dashed circle
 //             around the middle of the located places, at the radius of their year
 //   tracks    the links of the chosen reading, in the paper's colour, leaving each
@@ -49,9 +48,8 @@ const o = {
   margin: 160,
   until: 2026,
   maxRadius: 600, // the earliest year, in pixels from a place's centre
-  threadYears: 40, // how many years of rings make one thread where places cross
-  shadow: 0.24, // how much the edge of an over-thread is darkened
-  centuryGap: 2.2,
+  threadPitch: 6, // pixels from one thread to the next, about 18 years
+  threadWidth: 2.6,
   paper: '#f5ecc2',
   ink: '#111314',
   place: ['#f05a30', '#1c4286', '#f8b6ba', '#00978d', '#fcb315', '#6450a1',
@@ -101,54 +99,47 @@ const active = (i, year) => {
 const strandRgb = Object.fromEntries(Object.entries(o.strand).map(([k, v]) => [k, rgb(v)]));
 const paper = rgb(o.paper);
 
-// The colour one place lays down at a pixel, or null where it has nothing recorded.
-function colourAt(site, x, y) {
+// What one place lays down at a pixel, or null where it has nothing recorded.
+// Its rings are drawn as threads: concentric lines `threadPitch` apart, each one
+// `threadWidth` wide, alternating between the place's colour and the colour of
+// the strand recorded at that angle. A century loses its thread, leaving a gap.
+function threadAt(site, x, y) {
   const dx = x - site.centre[0], dy = y - site.centre[1];
   const r = Math.hypot(dx, dy);
-  if (r > o.maxRadius) return null;
-  const exact = yearAt(r);
-  const year = Math.floor(exact);
-  // a hairline of paper where one century meets the next
-  const toCentury = Math.abs(exact - Math.round(exact / 100) * 100);
-  if (toCentury < (o.centuryGap / o.maxRadius) * yearSpan / 2) return { c: paper, r, gap: true };
+  if (r > o.maxRadius + o.threadWidth) return null;
+  const k = Math.round(r / o.threadPitch); // the nearest thread
+  const cover = Math.min(1, Math.max(0, o.threadWidth / 2 + 0.5 - Math.abs(r - k * o.threadPitch)));
+  if (!cover) return null;
+  const from = yearAt((k + 0.5) * o.threadPitch), to = yearAt((k - 0.5) * o.threadPitch);
+  if (Math.floor(from / 100) !== Math.floor(to / 100)) return null; // this thread straddles a century
+  const year = Math.floor(yearAt(k * o.threadPitch));
   const here = site.list.filter((i) => active(i, year));
   if (!here.length) return null;
   const turn = (Math.atan2(dy, dx) / (2 * Math.PI) + 1.25) % 1; // 0 at north, clockwise
   const record = here[Math.min(here.length - 1, Math.floor(turn * here.length))];
-  const weft = (x + y) % 2 === 1;
-  return { c: weft ? strandRgb[records[record].strand] : site.colour, r };
+  return { c: k % 2 ? strandRgb[records[record].strand] : site.colour, cover, r, k };
 }
 
 const stack = process.argv.includes('--overlap=stack');
-const threadPx = (o.threadYears / yearSpan) * o.maxRadius;
 const rgba = new Uint8Array(W * H * 4);
 for (let y = 0; y < H; y++)
   for (let x = 0; x < W; x++) {
     const hits = [];
     for (const site of sites) {
       if (site.town) continue;
-      const hit = colourAt(site, x, y);
+      const hit = threadAt(site, x, y);
       if (hit) hits.push(hit);
     }
     if (!hits.length) continue;
-    let pick, c;
-    if (stack || hits.length === 1) {
-      pick = hits.reduce((a, b) => (b.r < a.r ? b : a));
-      c = pick.c;
-    } else {
-      // plain weave: each place's thread here is its ring band; the crossing's over/under
-      // alternates from one band to the next, for every place in the crossing
-      const bands = hits.map((h) => Math.floor(h.r / threadPx));
-      const turn = bands.reduce((n, k) => n + k, 0);
-      pick = hits[turn % hits.length];
-      // a century's hairline only shows where one place is alone; inside a crossing the other thread fills it
-      if (pick.gap) pick = hits.find((h) => !h.gap) ?? pick;
-      const along = (pick.r / threadPx) % 1;
-      const edge = 1.2 / threadPx;
-      c = along < edge || along > 1 - edge ? pick.c.map((v) => Math.round(v * (1 - o.shadow))) : pick.c;
-    }
+    // where threads of two places cross, which one lies on top alternates from one
+    // crossing to the next, as in plain weave (or, with --overlap=stack, the more recent)
+    const pick = stack || hits.length === 1
+      ? hits.reduce((a, b) => (b.r < a.r ? b : a))
+      : hits[hits.reduce((n, h) => n + h.k, 0) % hits.length];
+    const c = pick.c;
     const at = (y * W + x) * 4;
-    rgba[at] = c[0]; rgba[at + 1] = c[1]; rgba[at + 2] = c[2]; rgba[at + 3] = 255;
+    rgba[at] = c[0]; rgba[at + 1] = c[1]; rgba[at + 2] = c[2];
+    rgba[at + 3] = Math.round(255 * Math.max(...hits.map((h) => h.cover)));
   }
 
 const out = join(here, '../out');
