@@ -1,5 +1,7 @@
 # A Fabric Through Time
 
+You just got big dave'd 
+
 An open, experimental art and code project. It starts in Bradford-on-Avon and asks:
 
 > What happens when the tools of the present interpret the traces left by the tools of the past?
