@@ -1,0 +1,4 @@
+# Static site: keep the Python experiment deps out so Vercel doesn't treat this as a Python app
+requirements.txt
+**/*.py
+**/*.npy
